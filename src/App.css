@@ -1,38 +1,220 @@
-.App {
-  text-align: center;
+.mainContainer {
+  height: 100vh;
+  max-height: 100vh;
+  border-radius: 16px;
+  display: flex;
+  border: 1px solid inset #e9ecf2;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.loginContainer {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.loginContainer form {
+  width: 554px;
+  height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+  z-index: 1;
+}
+
+.loginHeader,
+.loginInput,
+.loginButton {
+  width: 381px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginHeader {
+  gap: 8px;
+}
+
+.loginHeader h1 {
+  font-family: ABeeZee;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 56px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #1a1a1e;
+}
+
+.loginHeader p {
+  font-family: ABeeZee;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 18px;
+  line-height: 155%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #62626b;
+}
+
+.loginInput {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputContainer {
+  height: 57px;
+  border-radius: 8px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 1);
+  gap: 12px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: #ffffff5d;
 }
 
-.App-link {
-  color: #61dafb;
+.inputContainer svg {
+  width: 24px;
+  height: 24px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.inputContainer input {
+  font-size: 16px;
+  color: #62626b;
+  border: none;
+  background-color: transparent;
+  width: 80%;
+}
+
+.inputContainer input:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.loginButton {
+  position: relative;
+}
+
+.loginButton button {
+  width: 381px;
+  height: 43px;
+  border-radius: 8px;
+  border: none;
+  color: #ffffff;
+  background-color: #770ece;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginButton button:disabled {
+  cursor: not-allowed;
+  background-color: #9414ff;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  position: absolute;
+  bottom: -25px;
+}
+
+.loginFooter {
+  font: ABeeZee;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 155%;
+  color: #62626b;
+}
+
+.loginLogo {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(243, 243, 247, 0.055);
+}
+
+.loginLogoImg {
+  width: 744px;
+  height: 523px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginLogoImg img {
+  width: 1630px;
+  height: 1631px;
+  rotate: -20deg;
+}
+
+.loginTextImg img {
+  width: 413px;
+  height: 75px;
+}
+
+.loginBackground {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.colorA {
+  position: absolute;
+  width: 667px;
+  height: 667px;
+  top: -247px;
+  left: 638px;
+  background-color: #e477f6;
+  filter: blur(250px);
+}
+
+.colorB {
+  position: absolute;
+  width: 667px;
+  height: 667px;
+  top: 667px;
+  left: 1083px;
+  background-color: #9e77f6;
+  filter: blur(300px);
+}
+
+.colorC {
+  position: absolute;
+  width: 813px;
+  height: 813px;
+  top: 646px;
+  left: -117px;
+  background-color: #b0d2e5;
+  filter: blur(600px);
+}
+
+.colorD {
+  position: absolute;
+  width: 807px;
+  height: 807px;
+  top: -372px;
+  left: 38px;
+  opacity: 0.6;
+  background-color: #9e77f6;
+  filter: blur(600px);
 }
