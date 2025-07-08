@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUser, clearUser } from "../features/userSlice";
+import { clearUser } from "../features/userSlice";
 import { logout } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -8,38 +8,18 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id, name, status, error } = useSelector((state) => state.user);
-  const { token } = useSelector((state) => state.auth); // جلب الـ token من auth state
-
-  useEffect(() => {
-    // شيك لو الـ token موجود
-    if (!token) {
-      console.log("No token found, redirecting to login");
-      navigate("/login", { replace: true });
-    } else {
-      console.log("Token found, fetching user:", token);
-      dispatch(fetchUser());
-    }
-  }, [dispatch, token, navigate]);
-
-  // التعامل مع خطأ 401
   useEffect(() => {
     if (error && error.includes("401")) {
-      console.log("401 error detected, redirecting to login");
       dispatch(logout());
       dispatch(clearUser());
-      localStorage.removeItem("token"); // امسح الـ token لو فيه خطأ 401
       navigate("/login", { replace: true });
     }
   }, [error, dispatch, navigate]);
-
   const handleLogout = () => {
-    console.log("Logging out");
-    localStorage.removeItem("token");
     dispatch(logout());
     dispatch(clearUser());
     navigate("/login", { replace: true });
   };
-
   if (status === "loading") {
     return (
       <div className="mainContainer">
@@ -49,14 +29,13 @@ export default function Dashboard() {
           <span className="colorC" />
           <span className="colorD" />
         </div>
-        <div className="loginContainer">
+        <div className="dashboardContainer">
           <p>Loading user info…</p>
         </div>
       </div>
     );
   }
-
-  if (status === "failed") {
+  if (status === "failed" && !error.includes("401")) {
     return (
       <div className="mainContainer">
         <div className="loginBackground">
@@ -65,8 +44,9 @@ export default function Dashboard() {
           <span className="colorC" />
           <span className="colorD" />
         </div>
-        <div className="loginContainer">
+        <div className="dashboardContainer">
           <p>Error: {error}</p>
+          <button onClick={handleLogout}>Back to Login</button>
         </div>
       </div>
     );
@@ -80,7 +60,7 @@ export default function Dashboard() {
         <span className="colorC" />
         <span className="colorD" />
       </div>
-      <div className="loginContainer">
+      <div className="dashboardContainer">
         <div className="loginHeader">
           <h1>Welcome, {name}!</h1>
           <p>Your user ID is: {id}</p>

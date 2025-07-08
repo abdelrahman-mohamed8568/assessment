@@ -11,11 +11,9 @@ export default function Login() {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { status, error: authError } = useSelector((state) => state.auth);
-
+  const { status } = useSelector((state) => state.auth);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Form validation
     if (!/.+@.+\..+/.test(email)) {
       return setError("Enter a valid email address");
     }
@@ -23,15 +21,14 @@ export default function Login() {
       return setError("Password required");
     }
     setError("");
-
     try {
-      const { token } = await dispatch(login({ email, password })).unwrap();
-      console.log("DEBUG Login, received token =", token);
-      localStorage.setItem("token", token);
-
-      // Navigate to dashboard
-      navigate("/dashboard", { replace: true });
-    } catch {
+      const token = await dispatch(login({ email, password })).unwrap();
+      if (token) {
+        navigate("/dashboard", { replace: true });
+      } else {
+        setError("Login failed: No token received.");
+      }
+    } catch (err) {
       setError("Email or password is incorrect");
     }
   };
@@ -113,9 +110,7 @@ export default function Login() {
                 {status === "loading" ? "Logging in…" : "Login"}
               </button>
             </div>
-            {(error || authError) && (
-              <p className="error">{error || authError}</p>
-            )}
+            {error && <p className="error">{error}</p>}
             <p className="loginFooter">Don't have an account? Sign up</p>
           </form>
           <div className="loginLogo">

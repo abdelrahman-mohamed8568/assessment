@@ -1,4 +1,3 @@
-// src/features/userSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchUser = createAsyncThunk(
@@ -14,9 +13,8 @@ export const fetchUser = createAsyncThunk(
     const response = await fetch(
       "https://api-yeshtery.dev.meetusvr.com/v1/user/info",
       {
-        method: "GET", // تأكد إن الـ method هو GET
+        method: "GET",
         headers: {
-          "Content-Type": "application/json", // أضفت Content-Type لو الـ API بيطلبها
           Authorization: `Bearer ${token}`,
         },
       }
@@ -27,7 +25,7 @@ export const fetchUser = createAsyncThunk(
     }
 
     const data = await response.json();
-    return data; // { id, name }
+    return data;
   }
 );
 

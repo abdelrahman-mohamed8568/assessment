@@ -1,28 +1,30 @@
-// src/features/authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { loginApi } from "../api/auth";
 
-// جلب الـ token من localStorage لو موجود
 const initialToken = localStorage.getItem("token") || null;
 
 export const login = createAsyncThunk("auth/login", async (credentials) => {
   const data = await loginApi(credentials);
   const token = data.token;
-  localStorage.setItem("token", token); // خزن الـ token في localStorage
+  localStorage.setItem("token", token);
   return token;
 });
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    token: initialToken, // استخدم الـ token من localStorage
+    token: initialToken,
     status: "idle",
+    isInitializing: true,
   },
   reducers: {
     logout(state) {
       state.token = null;
       state.status = "idle";
-      localStorage.removeItem("token"); // امسح الـ token من localStorage
+      localStorage.removeItem("token");
+    },
+    setInitializing(state, action) {
+      state.isInitializing = action.payload;
     },
   },
   extraReducers: (builder) =>
@@ -39,5 +41,5 @@ const authSlice = createSlice({
       }),
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setInitializing } = authSlice.actions;
 export default authSlice.reducer;
