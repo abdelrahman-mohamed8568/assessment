@@ -2,7 +2,7 @@ const Loading = () => {
   return (
     <div className="spinnerOverlay">
       <div className="spinnerContainer"></div>
-      <p>Checking authentication...</p>
+      <p>Checking authentication... </p>
     </div>
   );
 };
