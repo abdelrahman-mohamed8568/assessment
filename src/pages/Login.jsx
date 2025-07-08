@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../features/authSlice";
 import loginLogo from "../assets/loginLogo.png";
@@ -11,20 +11,27 @@ export default function Login() {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { status, error: authError } = useSelector((state) => state.auth);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email.match(/.+@.+\..+/)) {
+    // Form validation
+    if (!/.+@.+\..+/.test(email)) {
       return setError("Enter a valid email address");
     }
     if (!password) {
       return setError("Password required");
     }
     setError("");
+
     try {
-      await dispatch(login({ email, password })).unwrap();
-      navigate("/dashboard");
-    } catch (err) {
+      const { token } = await dispatch(login({ email, password })).unwrap();
+      console.log("DEBUG Login, received token =", token);
+      localStorage.setItem("token", token);
+
+      // Navigate to dashboard
+      navigate("/dashboard", { replace: true });
+    } catch {
       setError("Email or password is incorrect");
     }
   };
@@ -102,11 +109,13 @@ export default function Login() {
               </div>
             </div>
             <div className="loginButton">
-              <button type="submit" disabled={!email || !password}>
-                Login
+              <button type="submit" disabled={status === "loading"}>
+                {status === "loading" ? "Logging in…" : "Login"}
               </button>
-              {error && <p className="error">{error}</p>}
             </div>
+            {(error || authError) && (
+              <p className="error">{error || authError}</p>
+            )}
             <p className="loginFooter">Don't have an account? Sign up</p>
           </form>
           <div className="loginLogo">

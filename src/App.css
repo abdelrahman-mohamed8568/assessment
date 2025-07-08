@@ -1,27 +1,24 @@
 .mainContainer {
-  /* height: 100vh; */
   height: 1024px;
-  /* max-height: 100vh; */
-  width: 100%;
-  border-radius: 16px;
+  width: 1440px;
   display: flex;
-  border: 1px solid inset #e9ecf2;
-  overflow-y: hidden;
+  font-family: aBeeZee, sans-serif;
 }
 
 .loginContainer {
+  width: 1440px;
+  border-radius: 25px;
+  border: 3px solid #e9ecf2;
   display: flex;
-  width: 100%;
   overflow: hidden;
-  height: 100%;
-  justify-content: space-evenly;
   align-items: center;
 }
 
 .loginContainer form {
   width: 554px;
-  height: 100%;
+  height: 1024px;
   position: relative;
+  left: 38px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,11 +38,13 @@
 }
 
 .loginHeader {
-  gap: 8px;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .loginHeader h1 {
-  font-family: ABeeZee;
   font-weight: 400;
   font-style: Regular;
   font-size: 56px;
@@ -53,10 +52,11 @@
   letter-spacing: 0%;
   text-align: center;
   color: #1a1a1e;
+  padding-top: 5px;
 }
 
 .loginHeader p {
-  font-family: ABeeZee;
+  height: 56px;
   font-weight: 400;
   font-style: Regular;
   font-size: 18px;
@@ -70,6 +70,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 379px;
 }
 
 .inputContainer {
@@ -82,6 +83,7 @@
   align-items: center;
   justify-content: center;
   background-color: #ffffff5d;
+  height: 55px;
 }
 
 .inputContainer svg {
@@ -90,11 +92,13 @@
 }
 
 .inputContainer input {
+  font-family: aBeeZee, sans-serif;
   font-size: 16px;
+  font-weight: 400;
   color: #62626b;
   border: none;
   background-color: transparent;
-  width: 80%;
+  width: 83%;
 }
 
 .inputContainer input:focus {
@@ -115,8 +119,11 @@
   color: #ffffff;
   background-color: #770ece;
   cursor: pointer;
+  font-family: ABeeZee, sans-serif;
   font-size: 16px;
+  font-weight: 400;
   line-height: 100%;
+  letter-spacing: 0%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,17 +150,19 @@
 }
 
 .loginLogo {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(243, 243, 247, 0.055);
+  width: 826px;
+  height: 1024px;
+  position: absolute;
+  left: 614px;
+  overflow: hidden;
 }
 
 .loginLogoImg {
   width: 744px;
   height: 523px;
+  position: relative;
+  top: 138px;
+  left: -6px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -162,23 +171,26 @@
 .loginLogoImg img {
   width: 1630px;
   height: 1631px;
-  rotate: -20deg;
+  rotate: -21deg;
 }
 
 .loginTextImg img {
   width: 413px;
   height: 75px;
+  position: absolute;
+  top: 661px;
+  left: 170px;
 }
 
 .loginBackground {
-  position: absolute;
-  width: 100%;
+  width: 1440px;
   height: 1024px;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: -1;
   overflow: hidden;
+  z-index: -1;
 }
 
 .colorA {
@@ -189,6 +201,7 @@
   left: 638px;
   background-color: #e477f6;
   filter: blur(250px);
+  border-radius: 50%;
 }
 
 .colorB {
@@ -198,7 +211,8 @@
   top: 667px;
   left: 1083px;
   background-color: #9e77f6;
-  filter: blur(300px);
+  filter: blur(250px);
+  border-radius: 50%;
 }
 
 .colorC {
@@ -208,7 +222,8 @@
   top: 646px;
   left: -117px;
   background-color: #b0d2e5;
-  filter: blur(600px);
+  filter: blur(500px);
+  border-radius: 50%;
 }
 
 .colorD {
@@ -219,5 +234,6 @@
   left: 38px;
   opacity: 0.6;
   background-color: #9e77f6;
-  filter: blur(600px);
+  filter: blur(500px);
+  border-radius: 50%;
 }
