@@ -12,9 +12,14 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { status } = useSelector((state) => state.auth);
+  const emtyInput = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+  const disableButton =
+    !email || !password || !emtyInput(email) || status === "loading";
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!/.+@.+\..+/.test(email)) {
+    if (!emtyInput(email)) {
       return setError("Enter a valid email address");
     }
     if (!password) {
@@ -106,11 +111,11 @@ export default function Login() {
               </div>
             </div>
             <div className="loginButton">
-              <button type="submit" disabled={status === "loading"}>
+              <button type="submit" disabled={disableButton}>
                 {status === "loading" ? "Logging in…" : "Login"}
               </button>
+              {error && <p className="error">{error}</p>}
             </div>
-            {error && <p className="error">{error}</p>}
             <p className="loginFooter">Don't have an account? Sign up</p>
           </form>
           <div className="loginLogo">
